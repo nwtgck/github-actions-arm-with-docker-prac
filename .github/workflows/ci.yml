@@ -16,3 +16,17 @@ jobs:
         uname -a
         apt update
         EOF
+
+  my_arm_job2:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v1
+    - run: |
+        docker run --platform linux/arm/v7 -i -v $PWD:/ws ubuntu:18.04 bash << EOF
+        set -xeu
+        cd /ws
+        uname -a
+        apt update
+        EOF
